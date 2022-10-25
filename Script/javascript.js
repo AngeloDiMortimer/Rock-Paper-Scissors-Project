@@ -9,6 +9,7 @@ let getComputerChoice = (arr) => { //Returns an index from an array at random
 };
 
 
+
 let playRound = (computerSelection, playerSelection) => { //Plays a round of the game
     let result;
     computerSelection = getComputerChoice(array);
@@ -17,14 +18,14 @@ let playRound = (computerSelection, playerSelection) => { //Plays a round of the
     if (computerSelection == playerSelection) {
         computerScore = ++computerScore;
         playerScore = ++playerScore;
-        result = `It's a tie! Player Score: ${playerScore} Computer Score: ${computerScore}`;
+        result = `It's a tie!\nPlayer Score:${playerScore} Computer Score: ${computerScore}`;
     } else if (
         (computerSelection == "Rock" && playerSelection == "Scissors") ||
         (computerSelection == "Scissors" && playerSelection == "Paper") ||
         (computerSelection == "Paper" && playerSelection == "Rock") 
     ) {
         computerScore = ++computerScore;
-        result = `You Lose! Player Score: ${playerScore} Computer Score: ${computerScore}`;
+        result = `You Lose!\n${computerSelection} beats ${playerSelection}\nPlayer Score:${playerScore} Computer Score: ${computerScore}`;
     } else if (
         (playerSelection == "Rock" && computerSelection == "Scissors") ||
         (playerSelection == "Scissors" && computerSelection == "Paper") ||
@@ -32,7 +33,7 @@ let playRound = (computerSelection, playerSelection) => { //Plays a round of the
     )
     {
         playerScore = ++playerScore;
-        result = `You win! Player Score: ${playerScore} Computer Score: ${computerScore}`;
+        result = `You win!\n${playerSelection} beats ${computerSelection}!\nPlayer Score:${playerScore} Computer Score: ${computerScore}`;
     } else {
         console.log("invalid input");
         stop;
@@ -52,7 +53,7 @@ let game = () => {
      } else {
         finalResult = "You lose! Better luck next time";
      }
-     return finalResult;
+     return console.log(finalResult);
 }
 
 game();
