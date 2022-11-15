@@ -1,59 +1,43 @@
-const array = ["Rock", "Paper", "Scissors"];
 let playerScore = 0;
 let computerScore = 0;
+//button selectors
+const rockButton = document.querySelector('#rock');
+const paperButton = document.querySelector('#paper');
+const scissorsButton = document.querySelector('#scissors');
 
 let playerChoice = (string) => string.charAt(0).toUpperCase() + string.slice(1).toLowerCase(); // gets user string and capitalize only the first letter
 
-let getComputerChoice = (arr) => { //Returns an index from an array at random
-    return arr[~~(Math.random() * arr.length)];
+let computerPlay = () => { //gets the choice of the computer
+    const array = ["Rock", "Paper", "Scissors"];
+    const randomNum = ~~(Math.random() * array.length);
+    return array[randomNum];
 };
 
 
-
 let playRound = (computerSelection, playerSelection) => { //Plays a round of the game
-    let result;
-    computerSelection = getComputerChoice(array);
-    playerSelection = playerChoice(prompt("Please choice Rock, Paper, or Scissors: "));
-
-    if (computerSelection == playerSelection) {
-        computerScore = ++computerScore;
-        playerScore = ++playerScore;
-        result = `It's a tie!\nPlayer Score:${playerScore} Computer Score: ${computerScore}`;
-    } else if (
+    if (computerSelection == playerSelection) { //It's a tie
+        return `It's a tie!\nYou both picked ${playerSelection}\nPlayer Score:${playerScore} Computer Score: ${computerScore}`
+    } else if ( //Player loses
         (computerSelection == "Rock" && playerSelection == "Scissors") ||
         (computerSelection == "Scissors" && playerSelection == "Paper") ||
         (computerSelection == "Paper" && playerSelection == "Rock") 
     ) {
-        computerScore = ++computerScore;
-        result = `You Lose!\n${computerSelection} beats ${playerSelection}\nPlayer Score:${playerScore} Computer Score: ${computerScore}`;
-    } else if (
+        computerScore++;
+        return `You Lose!\n${computerSelection} beats ${playerSelection}\nPlayer Score:${playerScore} Computer Score: ${computerScore}`
+    } else if ( //Player wins
         (playerSelection == "Rock" && computerSelection == "Scissors") ||
         (playerSelection == "Scissors" && computerSelection == "Paper") ||
         (playerSelection == "Paper" && computerSelection == "Rock") 
     )
     {
-        playerScore = ++playerScore;
-        result = `You win!\n${playerSelection} beats ${computerSelection}!\nPlayer Score:${playerScore} Computer Score: ${computerScore}`;
-    } else {
-        console.log("invalid input");
-        stop;
-    }
-    return result;
+        playerScore++;
+        return `You win!\n${playerSelection} beats ${computerSelection}!\nPlayer Score:${playerScore} Computer Score: ${computerScore}`
+    } 
+    
 };
 
-let game = () => {
-    let finalResult;
-    for (let i = 0; i < 5; i++) {
-        console.log(playRound());
-     }
-     if (playerScore == computerScore) {
-        finalResult = "In the end it's a tie! Try again!";
-     } else if (playerScore >= computerScore) {
-        finalResult = "You win! You are good at this don't you?";
-     } else {
-        finalResult = "You lose! Better luck next time";
-     }
-     return console.log(finalResult);
-}
-
-game();
+rockButton.addEventListener('click', () => {
+    const computerSelection = computerPlay();
+    const playerSelection = 'Rock';
+    playRound(computerSelection, playerSelection);
+});
