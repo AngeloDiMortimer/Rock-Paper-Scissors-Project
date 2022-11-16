@@ -5,7 +5,7 @@ const rockButton = document.querySelector('#rock');
 const paperButton = document.querySelector('#paper');
 const scissorsButton = document.querySelector('#scissors');
 
-let playerChoice = (string) => string.charAt(0).toUpperCase() + string.slice(1).toLowerCase(); // gets user string and capitalize only the first letter
+const outcomeDiv = document.querySelector('#outcome');
 
 let computerPlay = () => { //gets the choice of the computer
     const array = ["Rock", "Paper", "Scissors"];
@@ -36,8 +36,21 @@ let playRound = (computerSelection, playerSelection) => { //Plays a round of the
     
 };
 
+//Evento cuando se pulsan los botones
 rockButton.addEventListener('click', () => {
     const computerSelection = computerPlay();
     const playerSelection = 'Rock';
+    playRound(computerSelection, playerSelection);
+});
+
+paperButton.addEventListener('click', () => {
+    const computerSelection = computerPlay();
+    const playerSelection = 'Paper';
+    playRound(computerSelection, playerSelection);
+});
+
+scissorsButton.addEventListener('click', () => {
+    const computerSelection = computerPlay();
+    const playerSelection = 'Scissors';
     playRound(computerSelection, playerSelection);
 });
